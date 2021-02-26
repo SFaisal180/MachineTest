@@ -1,0 +1,18 @@
+﻿@model MachineTest.Models.DBModels.Product
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Product Details</h3>
+            <ul>
+                <li>Id : @Model.ProductId</li>
+                <li>Name : @Model.ProductName</li>
+                <li>Category : @Model.Category.CategoryName</li>
+            </ul>
+        </div>
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="/Products/Edit/@Model.ProductId">Edit</a>
+            <a class="btn btn-danger" href="/Products/Delete/@Model.ProductId">Delete</a>
+        </div>
+    </div>
+</div>

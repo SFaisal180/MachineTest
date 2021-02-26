@@ -1,0 +1,91 @@
+﻿@using MachineTest.Models.ViewModels
+@model ProductsViewModel
+
+@if (Model != null && Model.Products != null && Model.Products.Any())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Products</h1>
+            </div>
+            <br />
+            <hr />
+
+            <div class="col-md-6">
+                <a class="btn btn-primary" href="/Products/Edit">Add new</a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span>Page Size : </span>
+                  <a href="/Products/Index?PageNo=1&Size=5">5</a>
+
+                <a href="/Products/Index?PageNo=1&Size=10">10</a>
+
+                <a href="/Products/Index?PageNo=1&Size=15">15</a>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Category Id</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Product Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                @product.Category.CategoryId
+                            </td>
+                            <td>
+                                @product.Category.CategoryName
+                            </td>
+                            <td>
+                                @product.ProductId
+                            </td>
+                            <td>
+                                <a href="/Products/Detail/@product.ProductId">@product.ProductName</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12">Pages</div>
+            <div class="col-md-12">@GetPagination(Model.PageNo, Model.Size, Model.Total)</div>
+        </div>
+    </div>
+
+
+}
+else
+{
+    <h1>No Products to display</h1>
+    <a href="/Products/Edit">Add new</a>
+}
+@helper GetPagination(int pageNo, int size, int total)
+{
+    if (total > size)
+    {
+        int pages = total / size;
+        pages++;
+        for (int i = 1; i <= pages; i++)
+        {
+            <a href="/Products/Index?PageNo=@i&Size=@size">@i</a>
+        }
+    }
+    else
+    {
+        <a href="/Products/Index?PageNo=1&Size=10">1</a>
+    }
+
+
+}

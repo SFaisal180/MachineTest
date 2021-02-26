@@ -1,0 +1,52 @@
+﻿@using MachineTest.Models.DBModels
+@model IEnumerable<Category>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Categories</h1>
+            </div>
+            <br />
+            <hr />
+            <div class="col-md-12">
+                <a class="btn btn-primary" href="/Categories/Edit">Add new</a>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Category Id</th>
+                        <th scope="col">Category Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var category in Model)
+                    {
+                    <tr>
+                        <td>
+                            @category.CategoryId
+                        </td>
+                       
+                        <td>
+                            <a href="/Categories/Detail/@category.CategoryId">@category.CategoryName</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+}
+else
+{
+    <h1>No Categories to display</h1>
+    <a href="/Categories/Edit">Add new</a>
+}
